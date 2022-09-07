@@ -1,5 +1,11 @@
 # Instructions
 
+The docker compose file is based on the official docker compose by airflow (https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.yaml). It uses the local executor to run the DAG. 
+
+First task in the dag drops table `users` if table is present. The next task creates the `users` table is created on postgres x, and then data is inserted into it. After that the fourth task drops table `users` if it is present in postgres y.
+
+Then the fifth task gets the table structure and details from postgres x and creates table `users` in postgres y. The final task copies data from postgres x to postgres y.
+
 1. After cloning the repository, `cd` inside `glints_assignment`
 2. Run `DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose up -d` (arm64 doesn't work properly with postgres)
 3. The airflow UI should be available at http://127.0.0.1:5884/
